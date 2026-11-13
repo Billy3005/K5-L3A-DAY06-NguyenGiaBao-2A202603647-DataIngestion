@@ -44,14 +44,14 @@
   - **Cách tách:** theo mục. Test chỉ lấy từ các mục 3.4, 4.2, 14.3, 14.5, mà không câu dev nào dùng.
   - **Câu có filter:** **5 câu** (q05, q09, q13 ở dev; q18, q19 ở test). Filter `{"chapter": N}` là **input giả định "người học đang học chương N"**, có trước khi truy xuất. Các distractor khác chương đã được **dự đoán và ghi lại trước khi chạy**.
   - **Kiểm chứng evidence:** `scripts/verify_benchmark.py` xác nhận 22/22 evidence có trên trang gold sau chuẩn hóa, filter không loại mất trang gold, và không câu hỏi nào trùng 8 từ liên tiếp với evidence. Có `alt_gold` khi nhiều trang cùng hợp lệ (q04: p71 hoặc p82).
-  - Bộ câu hỏi được khóa ở commit `48d9be9` **trước mọi lần chạy**. Chi tiết: [benchmark/README.md](../../benchmark/README.md).
+  - Bộ câu hỏi được khóa ở commit `edf32b9` **trước mọi lần chạy**. Chi tiết: [benchmark/README.md](../../benchmark/README.md).
 - **Tiêu chí chọn chiến lược (chốt trước khi xem test, chỉ dùng dev):**
   1. Hit@3 dev cao nhất, coi chênh ≤1 câu là hòa.
   2. Hit@1 dev.
   3. Ít chunk hơn.
   4. C thay B nếu Hit@3 trên các câu filter của dev không thấp hơn.
 
-  Code từ chối chạy test khi chưa có `selection.json`. Lựa chọn C được commit ở `a0fa5d0`; test chạy **một lần** sau đó (`cc0ed58`).
+  Code từ chối chạy test khi chưa có `selection.json`. Lựa chọn C được commit ở `b073092`; test chạy **một lần** sau đó (`f81eec1`).
 
 ## Kết quả
 

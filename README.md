@@ -50,7 +50,7 @@ Nếu `extract_pages` hoặc `make_chunks` được chạy lại, kết quả l�
 | `artifacts/experiment_log.csv` | cấu hình, giả thuyết và Hit@1/Hit@3 của A/B/C |
 | `starter/results/` | trace, metrics, thống kê chunk, log ingest, nhãn audit (xem README trong thư mục) |
 
-Mốc commit chứng minh thứ tự làm việc: `48d9be9` khóa benchmark → `a0fa5d0` chọn chiến lược trên dev → `cc0ed58` chạy test một lần.
+Mốc commit chứng minh thứ tự làm việc: `edf32b9` khóa benchmark → `b073092` chọn chiến lược trên dev → `f81eec1` chạy test một lần.
 
 ---
 
