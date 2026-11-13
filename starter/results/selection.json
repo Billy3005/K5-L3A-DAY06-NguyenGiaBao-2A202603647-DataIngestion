@@ -1,0 +1,11 @@
+{
+  "chosen": "C",
+  "decided_at": "2026-11-13T09:51:54+00:00",
+  "based_on": "dev only (test not run yet)",
+  "steps": [
+    "1. dev Hit@3 [('A', '9/16'), ('B', '8/16'), ('C', '9/16')] -> within 1 of best: ['A', 'B', 'C']",
+    "2. dev Hit@1 [('A', '8/16'), ('B', '7/16'), ('C', '8/16')] -> ['A', 'B', 'C']",
+    "3. fewest chunks -> ['B', 'C']",
+    "4. C vs B on dev filter questions: C 1/3 vs B 0/3 -> ['C']"
+  ]
+}
