@@ -4,6 +4,7 @@ Extraction uses PyMuPDF text blocks (one block ~ one paragraph) instead of plain
 pypdf text, because pypdf loses paragraph boundaries that strategy B needs.
 """
 import csv
+import json
 import re
 import unicodedata
 from pathlib import Path
@@ -89,6 +90,17 @@ def load_pdf(path: Path, document_id: str, source: str, pages: list[int],
                         "chars": len(page_text), "blocks": len(blocks), "image_blocks": images,
                         "dropped_header_footer": " || ".join(dropped)})
     return result
+
+
+def read_pages_jsonl(path: Path) -> list[DocumentPage]:
+    """Load the normalized pages produced by scripts/extract_pages.py."""
+    pages = []
+    with path.open(encoding="utf-8") as handle:
+        for line in handle:
+            row = json.loads(line)
+            meta = {k: v for k, v in row.items() if k not in ("document_id", "source", "page", "text")}
+            pages.append(DocumentPage(row["document_id"], row["source"], row["page"], row["text"], meta))
+    return pages
 
 
 def load_page_manifest(path: Path) -> dict[int, dict[str, Any]]:
