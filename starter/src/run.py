@@ -19,7 +19,8 @@ from datetime import datetime, timezone
 from dotenv import load_dotenv
 
 from .chunking import build_chunks
-from .config import EMBEDDING_DIM, PAGES_JSONL, QUESTIONS, RESULTS, STARTER, STRATEGIES, TOP_K
+from .config import (ABLATIONS, ALL_CONFIGS, EMBEDDING_DIM, PAGES_JSONL, QUESTIONS, RESULTS, STARTER,
+                     STRATEGIES, TOP_K)
 from .embeddings import E5Embedder
 from .evaluation import evaluate_query, summarize
 from .ingestion import read_pages_jsonl
@@ -38,7 +39,7 @@ def get_store() -> PgVectorStore:
 
 def ingest(store: PgVectorStore, embedder: E5Embedder, index: str) -> dict:
     """Chunk the corpus for `index`, embed only new/changed chunks, sync to pgvector."""
-    cfg = next(c for c in STRATEGIES.values() if c["index"] == index)
+    cfg = next(c for c in ALL_CONFIGS.values() if c["index"] == index)
     t0 = time.perf_counter()
     pages = read_pages_jsonl(PAGES_JSONL)
     chunks = build_chunks(pages, cfg)
@@ -69,21 +70,25 @@ def ingest(store: PgVectorStore, embedder: E5Embedder, index: str) -> dict:
 def retrieve(store: PgVectorStore, embedder: E5Embedder, strategy: str, question: str,
              question_filter: dict | None) -> tuple[list[dict], dict | None]:
     """Top-k for one question. Only strategy C uses the filter, and only if the question has one."""
-    cfg = STRATEGIES[strategy]
+    cfg = ALL_CONFIGS[strategy]
     applied = question_filter if (cfg["use_filter"] and question_filter) else None
     return store.search(cfg["index"], embedder.embed_query(question), TOP_K, applied), applied
 
 
-def evaluate(store: PgVectorStore, embedder: E5Embedder, split: str) -> list[dict]:
+def evaluate(store: PgVectorStore, embedder: E5Embedder, split: str, configs: dict | None = None,
+             tag: str = "") -> list[dict]:
     """Run every strategy on one split; save full top-3 traces and n/N metrics."""
+    configs = configs or STRATEGIES
     if split == "test" and not SELECTION.exists():
         raise SystemExit("Refusing to run test: choose the strategy on dev first (python -m src.run select).")
+    if split == "test" and any(name in ABLATIONS for name in configs):
+        raise SystemExit("Refusing to run post-hoc ablations on test: the test split is already spent.")
     questions = [json.loads(l) for l in QUESTIONS.open(encoding="utf-8") if l.strip()]
     questions = [q for q in questions if q["split"] == split]
     traces = []
     for q in questions:
         query_vector = embedder.embed_query(q["question"])   # same query vector for A, B and C
-        for strategy, cfg in STRATEGIES.items():
+        for strategy, cfg in configs.items():
             applied = q["filter"] if (cfg["use_filter"] and q["filter"]) else None
             t0 = time.perf_counter()
             hits = store.search(cfg["index"], query_vector, TOP_K, applied)
@@ -96,11 +101,11 @@ def evaluate(store: PgVectorStore, embedder: E5Embedder, split: str) -> list[dic
                            "search_ms": round(search_ms, 2), "model": embedder.model_name,
                            **evaluate_query(q, hits)})
     (RESULTS / "traces").mkdir(exist_ok=True)
-    with (RESULTS / "traces" / f"{split}.jsonl").open("w", encoding="utf-8") as handle:
+    with (RESULTS / "traces" / f"{tag}{split}.jsonl").open("w", encoding="utf-8") as handle:
         for t in traces:
             handle.write(json.dumps(t, ensure_ascii=False) + "\n")
     rows = summarize(traces)
-    with (RESULTS / f"metrics_{split}.csv").open("w", newline="", encoding="utf-8") as handle:
+    with (RESULTS / f"metrics_{tag}{split}.csv").open("w", newline="", encoding="utf-8") as handle:
         writer = csv.DictWriter(handle, fieldnames=list(rows[0]))
         writer.writeheader()
         writer.writerows(rows)
@@ -140,13 +145,17 @@ def select_strategy() -> dict:
 def main() -> None:
     parser = argparse.ArgumentParser()
     sub = parser.add_subparsers(dest="cmd", required=True)
-    sub.add_parser("ingest")
+    ing = sub.add_parser("ingest")
+    ing.add_argument("--index", action="append", choices=sorted({c["index"] for c in ALL_CONFIGS.values()}),
+                     help="default: A and B (the pre-registered indexes)")
     q = sub.add_parser("query")
     q.add_argument("question")
-    q.add_argument("--strategy", choices=sorted(STRATEGIES), default="B")
+    q.add_argument("--strategy", choices=sorted(ALL_CONFIGS), default="B")
     q.add_argument("--chapter", type=int)
     e = sub.add_parser("evaluate")
     e.add_argument("--split", choices=["dev", "test"], required=True)
+    e.add_argument("--ablation", action="store_true",
+                   help="post-hoc: evaluate A, B and the ablation configs (dev only) into *_ablation_* files")
     sub.add_parser("select")
     args = parser.parse_args()
 
@@ -155,14 +164,17 @@ def main() -> None:
         return
     store, embedder = get_store(), E5Embedder()
     if args.cmd == "evaluate":
-        for row in evaluate(store, embedder, args.split):
+        configs, tag = None, ""
+        if args.ablation:
+            configs, tag = {"A": STRATEGIES["A"], "B": STRATEGIES["B"], **ABLATIONS}, "ablation_"
+        for row in evaluate(store, embedder, args.split, configs, tag):
             if row["subset"] in ("all", "filter_questions"):
                 print(f"{row['strategy']} {row['split']:<4} {row['subset']:<17} Hit@1 {row['hit1_frac']:<6} "
                       f"Hit@3 {row['hit3_frac']:<6} gold-page@3 {row['gold_page_in_top3']:<6} "
                       f"split-evidence misses {row['evidence_split_misses']}  filter-chapter top3 "
                       f"{row['top3_in_filter_chapter']}  {row['mean_query_ms']} ms")
     elif args.cmd == "ingest":
-        for index in ("A", "B"):
+        for index in (args.index or ["A", "B"]):
             print(ingest(store, embedder, index))
     else:
         hits, applied = retrieve(store, embedder, args.strategy, args.question,

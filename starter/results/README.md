@@ -14,7 +14,10 @@ Excerpts of chunk text in this folder come from *Principles of Microeconomics 3e
 | `metrics_{dev,test}.csv` | same | Hit@1 / Evidence Hit@3 as n/N per strategy, overall, per type and for filter questions |
 | `selection.json` | `python -m src.run select` | Strategy chosen by the pre-registered dev-only rule (committed before test) |
 | `audit/*.csv`, `audit/REVIEW.md` | `python -m scripts.make_audit_sheets` | Manual labeling sheets (coherence, metadata, grounding); labels by the author |
-| `audit_summary.md` | `python -m scripts.summarize_audit` | Aggregated manual labels; also injected into the report |
+| `audit_summary.md` | `python -m scripts.summarize_audit` | Final labels (LLM labels after student review, before/after shown) and review acceptance; also injected into the report |
+| `audit/human_review.csv` | written by the student | Student's verification of all 92 LLM labels: `llm_label`, `final_label`, `decision` (accept/modify/audit_pass), `reviewer_note` (Vietnamese, paraphrased from the LLM reasons), provenance columns |
+| `audit/equivalent_evidence.jsonl`, `metrics_equivalent.csv` | `python -m scripts.equivalent_hits` | Post-hoc, student-confirmed equivalent evidence and the secondary Hit metric |
+| `traces/ablation_dev.jsonl`, `metrics_ablation_dev.csv` | `python -m src.run evaluate --split dev --ablation` | Post-hoc B500 ablation (dev only, not used for selection) |
 
 ## Storage and ingestion
 

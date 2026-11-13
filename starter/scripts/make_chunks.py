@@ -12,13 +12,14 @@ from dataclasses import asdict
 from transformers import AutoTokenizer
 
 from src.chunking import build_chunks
-from src.config import EMBEDDING_MAX_TOKENS, EMBEDDING_MODEL, PAGES_JSONL, PASSAGE_PREFIX, RESULTS, STRATEGIES
+from src.config import (ABLATIONS, ALL_CONFIGS, EMBEDDING_MAX_TOKENS, EMBEDDING_MODEL, PAGES_JSONL,
+                        PASSAGE_PREFIX, RESULTS)
 from src.ingestion import read_pages_jsonl
 from src.models import Chunk, DocumentPage
 
 
 def build(name: str, pages: list[DocumentPage]) -> list[Chunk]:
-    return build_chunks(pages, STRATEGIES[name])
+    return build_chunks(pages, ALL_CONFIGS[name])
 
 
 def self_check(name: str, pages: list[DocumentPage], chunks: list[Chunk]) -> None:
@@ -41,7 +42,7 @@ def main() -> None:
     tokenizer = AutoTokenizer.from_pretrained(EMBEDDING_MODEL)
     (RESULTS / "chunks").mkdir(parents=True, exist_ok=True)
     rows = []
-    for name in ("A", "B"):
+    for name in ("A", "B", *ABLATIONS):
         chunks = build(name, pages)
         self_check(name, pages, chunks)
         tokens = [len(tokenizer(PASSAGE_PREFIX + c.text)["input_ids"]) for c in chunks]
@@ -53,7 +54,8 @@ def main() -> None:
             for c, t in zip(chunks, tokens):
                 handle.write(json.dumps({**asdict(c), "tokens": t}, ensure_ascii=False) + "\n")
         rows.append({
-            "strategy": name, "params": json.dumps({k: v for k, v in STRATEGIES[name].items()
+            "strategy": name, "post_hoc": name in ABLATIONS,
+            "params": json.dumps({k: v for k, v in ALL_CONFIGS[name].items()
                                                      if k in ("chunking", "size", "overlap", "max_size")}),
             "chunks": len(chunks), "total_chars": sum(lengths),
             "len_min": min(lengths), "len_median": int(statistics.median(lengths)),

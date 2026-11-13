@@ -1,0 +1,7 @@
+split,strategy,N,hit1_strict,hit3_strict,hit1_with_equivalent,hit3_with_equivalent
+dev,A,16,8/16,9/16,8/16,9/16
+dev,B,16,7/16,8/16,7/16,8/16
+dev,C,16,8/16,9/16,8/16,9/16
+test,A,6,2/6,2/6,2/6,2/6
+test,B,6,4/6,4/6,4/6,5/6
+test,C,6,4/6,5/6,4/6,6/6

@@ -26,3 +26,11 @@ STRATEGIES = {
     "C": {"chunking": "paragraph", "max_size": 1000, "index": "B", "use_filter": True,
           "hypothesis": "Same chunks as B; chapter filter removes cross-chapter distractors on filter questions."},
 }
+
+# POST-HOC ablation, added AFTER dev and test results were seen. Never used for strategy
+# selection and only evaluated on dev (the code refuses to run ablations on test).
+ABLATIONS = {
+    "B500": {"chunking": "paragraph", "max_size": 500, "index": "B500", "use_filter": False,
+             "hypothesis": "Post-hoc: paragraph structure at A's size; separates structure from chunk size in A-B."},
+}
+ALL_CONFIGS = {**STRATEGIES, **ABLATIONS}

@@ -5,6 +5,29 @@
 
 > Mọi số liệu dưới đây lấy từ file trong repo, đường dẫn ghi tại chỗ. Lệnh tái lập nằm ở [README.md](../../README.md#bài-làm--cách-chạy-lại).
 
+## Tóm tắt
+
+- **Pipeline:**
+  - 78 trang PDF đi qua PyMuPDF và được chuẩn hóa.
+  - Ba chiến lược: A cửa sổ 500/50, B theo đoạn ≤1000, C = B + lọc `chapter`.
+  - Embedding e5-base chạy local (768 chiều, 0 USD), lưu trong pgvector với exact cosine.
+  - Nạp lại không trùng, đã kiểm chứng.
+- **Quy trình chống rò rỉ:**
+  - Benchmark 22 câu (16 dev / 6 test, 5 câu filter) được khóa trước khi chạy.
+  - Chọn chiến lược trên dev bằng quy tắc chốt sẵn, rồi mới chạy test một lần.
+  - Code chặn chạy test trước khi chọn.
+- **Kết quả (Evidence Hit@3):** dev A 9/16, B 8/16, **C 9/16**; test A 2/6, B 4/6, **C 5/6**. C được chọn.
+- **Phát hiện chính:**
+  1. A trượt vì cửa sổ cắt đôi evidence.
+  2. B trượt vì chunk dài bị pha loãng ngữ nghĩa. Thí nghiệm hậu kiểm B500 trên dev (13/16) ủng hộ giải thích này.
+  3. Lọc theo chương là thay đổi có bằng chứng rõ nhất: các distractor khác chương được dự đoán trước, xuất hiện đúng như dự đoán, và filter sửa được (q13, q19).
+- **Audit:**
+  - Coherence: A 1.00/2, B/C 1.70/2.
+  - Metadata đúng 54/54.
+  - Grounding (sau kiểm duyệt): A 1.33, B 1.83, C 2.00.
+  - Nhãn do LLM judge gán, học viên kiểm duyệt (chấp nhận 91, sửa 1).
+- **Giới hạn chính:** mẫu nhỏ (một câu tương đương 6–17 điểm %), nhãn không phải chú thích độc lập, kết quả B500 chưa có test độc lập.
+
 ## Dữ liệu và pipeline
 
 - **Chủ đề, nguồn, quyền, số trang và quy tắc tính trang:**
@@ -77,24 +100,64 @@
 - **Tài liệu bị sửa** (mô phỏng p85 trong namespace riêng): 2 chunk cập nhật, 2 chunk cũ bị xóa, 5 giữ nguyên.
 - Thời gian là một lần chạy trên CPU laptop, chỉ mang tính tham khảo. Thời gian truy vấn bao gồm cả việc mở kết nối DB cho mỗi truy vấn.
 
-<!-- AUDIT_TABLE_START -->
-| Strategy | Coherence trung bình /2 (n) | Metadata đủ và đúng (n/N) | Filter tuân thủ, test (n/N) | Grounding 0/1/2 và trung bình /2 |
-|---|---|---|---|---|
-| A | 1.00/2 (n=10; 0/1/2 = 0/10/0) | 18/18 | 0/2 (filter not applied; diagnostic) | 1.33/2 (n=6; 0/1/2 = 1/2/3) |
-| B | 1.70/2 (n=10; 0/1/2 = 0/3/7) | 18/18 | 0/2 (filter not applied; diagnostic) | 2.00/2 (n=6; 0/1/2 = 0/0/6) |
-| C (dùng chunk B) | 1.70/2 (n=10; 0/1/2 = 0/3/7) | 18/18 | 2/2 | 2.00/2 (n=6; 0/1/2 = 0/0/6) |
+**Chỉ số phụ: Hit có tính bằng chứng tương đương.** GUIDE tính hit khi chunk chứa evidence đã ghi *"hoặc bằng chứng tương đương được người chấm xác nhận"*. Chỉ số chính ở trên dùng định nghĩa chặt, chốt trước khi chạy, và **không thay đổi**. Bảng dưới tính lại từ chính các trace, cộng thêm các câu tương đương trong [equivalent_evidence.jsonl](../../starter/results/audit/equivalent_evidence.jsonl):
+- Các câu này được thêm **sau khi xem kết quả**: hiện chỉ có 1 câu cho q21 ở p348, phát hiện khi chấm grounding.
+- Chúng chỉ được tính khi học viên xác nhận (`confirmed_by_student = "yes"`). Câu q21 được xác nhận qua bước kiểm duyệt: học viên chấp nhận grounding q21 B/C = 2, và ghi chú kiểm duyệt trích đúng câu này.
+- Áp dụng như nhau cho mọi chiến lược.
 
-_Bảng do `python -m scripts.summarize_audit` sinh từ nhãn trong `starter/results/audit/` (người chấm và phương pháp: xem mục ngay dưới)._
+<!-- EQUIV_TABLE_START -->
+| Split | Strategy | Hit@1 chặt | Hit@3 chặt | Hit@1 + tương đương | Hit@3 + tương đương |
+|---|---|---|---|---|---|
+| dev | A | 8/16 | 9/16 | 8/16 | 9/16 |
+| dev | B | 7/16 | 8/16 | 7/16 | 8/16 |
+| dev | C | 8/16 | 9/16 | 8/16 | 9/16 |
+| test | A | 2/6 | 2/6 | 2/6 | 2/6 |
+| test | B | 4/6 | 4/6 | 4/6 | 5/6 |
+| test | C | 4/6 | 5/6 | 4/6 | 6/6 |
+
+_Bằng chứng tương đương đã được học viên xác nhận: ['q21']. Các ô thay đổi: ['test q21 B rank 2 p348', 'test q21 C rank 2 p348']. Sinh bởi `python -m scripts.equivalent_hits`._
+<!-- EQUIV_TABLE_END -->
+
+<!-- AUDIT_TABLE_START -->
+| Strategy | Coherence /2 (0/1/2) | Metadata đủ và đúng (n/N) | Filter tuân thủ, test (n/N) | Grounding /2 (0/1/2): LLM → **sau kiểm duyệt** |
+|---|---|---|---|---|
+| A | 1.00/2 (0/10/0) | 18/18 | 0/2 (không áp filter; chẩn đoán) | 1.33/2 (1/2/3) |
+| B | 1.70/2 (0/3/7) | 18/18 | 0/2 (không áp filter; chẩn đoán) | 2.00/2 (0/0/6) → **1.83/2 (0/1/5)** |
+| C (dùng chunk B) | 1.70/2 (0/3/7) | 18/18 | 2/2 | 2.00/2 (0/0/6) |
+
+_Nguồn: nhãn LLM judge **đã được học viên kiểm duyệt** (chấp nhận hoặc sửa từng mục). Sinh bởi `python -m scripts.summarize_audit` từ `starter/results/audit/`._
 <!-- AUDIT_TABLE_END -->
 
-**Trace, nhãn thủ công và cách chọn mẫu:**
+**Trace, nhãn audit và cách chọn mẫu:**
 - **Trace đầy đủ** (question, filter, chunk_id, text, score, metadata, cờ hit): [traces/dev.jsonl](../../starter/results/traces/dev.jsonl), [traces/test.jsonl](../../starter/results/traces/test.jsonl). Chỉ số: [metrics_dev.csv](../../starter/results/metrics_dev.csv), [metrics_test.csv](../../starter/results/metrics_test.csv).
-- **Nhãn (coherence, metadata, grounding):** [starter/results/audit/](../../starter/results/audit/). **Các nhãn này do một LLM làm người chấm (Claude Sonnet 5.5, qua subagent của Claude Code, ngày 13/11/2026), không phải do học viên tự chấm.** Người chấm theo thang trong GUIDE.md mục 4 (coherence 0/1/2, grounding 0/1/2, metadata Y/N) và ghi lý do cho từng nhãn. Cột `label_0_1_2`, `reason`, `manual_*` và `notes` trong các file CSV là đầu ra của LLM này.
+- **Quy trình gán nhãn: LLM gán nhãn, học viên kiểm duyệt** (*LLM-assisted annotation with human verification*). File: [starter/results/audit/](../../starter/results/audit/).
+  1. **Gán nhãn:** LLM judge (Claude Sonnet 5.5, qua subagent của Claude Code, ngày 13/11/2026) chấm 92 mục (20 coherence, 54 metadata, 18 grounding) theo thang trong GUIDE.md mục 4 (coherence 0/1/2, grounding 0/1/2, metadata Y/N), kèm lý do từng mục. Cột `label_0_1_2`, `reason`, `manual_*` và `notes` trong các file CSV là đầu ra của LLM này.
+  2. **Kiểm duyệt:** học viên xem xét toàn bộ 92 nhãn cùng lý do của LLM. Mỗi mục được quyết định là chấp nhận (`accept`, hoặc `audit_pass` với metadata) hay sửa (`modify`). Kết quả: **chấp nhận 91, sửa 1**. Mọi quyết định nằm trong [human_review.csv](../../starter/results/audit/human_review.csv), gồm các cột `llm_label`, `final_label`, `decision`, `reviewer_note`, `label_source` và `review_method`.
+  3. **Nhãn cuối** = nhãn LLM, trừ mục học viên đã sửa. Bảng trên ghi cả trước và sau kiểm duyệt khi hai bên khác nhau. Script kiểm tra `llm_label` trong file kiểm duyệt khớp với file nhãn LLM, và quyết định `modify` phải đi kèm thay đổi nhãn cùng ghi chú.
+  4. **Ghi chú kiểm duyệt** (`reviewer_note`, tiếng Việt) được **diễn đạt lại từ lý do của LLM**, như cột `review_method` ghi rõ. Chúng là sản phẩm của bước kiểm duyệt, **không phải chú thích độc lập**. Riêng ghi chú của mục bị sửa là lập luận của học viên.
 - **Coherence:** 10 vị trí chốt trước, gồm mỗi trang thứ 8 trong 78 trang đã sắp xếp (p59, 67, 75, 83, 98, 106, 114, 341, 349, 357), vị trí là ký tự giữa trang. C dùng chung chunk với B nên dùng chung nhãn.
 - **Metadata và grounding:** 6 câu test × top-3 × 3 chiến lược. Máy kiểm tra trước metadata: 54/54 bản ghi có text nằm đúng trang và chapter/section khớp manifest. Với metadata, người chấm LLM so từng bản ghi với `pages.jsonl` (text nằm đúng vị trí trên trang, chapter theo outline PDF, section theo vị trí heading trong trang) và với text PDF gốc qua PyMuPDF: **cả 54/54 bản ghi** được đối chiếu trực tiếp với trang PDF, kể cả các cửa sổ A nằm sát heading ở p82, p112, p341.
 - **Phương pháp LLM judge:** coherence chỉ cho người chấm thấy `chunk_text` và thang điểm, không cho biết chiến lược hay kết quả truy xuất; grounding cho thấy câu hỏi, đáp án tham chiếu, evidence và top-3 text (không phải câu trả lời của LLM), và đánh giá bằng chứng tương đương trên trang khác vẫn được tính; cột proxy tự động `auto_evidence_hit3_proxy` không được sao chép, các chỗ lệch với proxy được ghi trong cột `reason`.
-- **Rủi ro:** thiên lệch của LLM judge (có thể quá dễ dãi hoặc không nhất quán), chỉ một người chấm, không đo được độ đồng thuận giữa người chấm, và không có người thứ hai kiểm tra.
-- **Học viên xem xét lại nhãn:** _(chưa / đã — ghi số nhãn đã sửa)_
+- **Kết quả kiểm duyệt** (sinh tự động từ `human_review.csv`):
+
+<!-- REVIEW_START -->
+| Phần | Mục đã kiểm duyệt | Chấp nhận nhãn LLM | Sửa |
+|---|---|---|---|
+| coherence | 20/20 | 20 | 0 |
+| metadata | 54/54 | 54 | 0 |
+| grounding | 18/18 | 17 | 1 |
+
+Mục bị sửa: grounding q19 B: 2 → 1. Quyết định ghi trong file: {'accept': 37, 'audit_pass': 54, 'modify': 1}.
+
+_Đây là **tỷ lệ chấp nhận khi kiểm duyệt**, không phải độ đồng thuận giữa hai người chấm độc lập: người kiểm duyệt đã thấy nhãn và lý do của LLM._
+<!-- REVIEW_END -->
+
+- **Mục bị sửa, grounding B q19 (2 → 1).** Theo ghi chú của học viên: đoạn ở p84 giải thích đúng nguyên lý giá trần làm lượng cầu vượt lượng cung và gây thiếu hụt. Nhưng đó là ví dụ kiểm soát tiền thuê nhà ở Ch3, không phải ví dụ thị trường thẻ tín dụng ở Ch4 mà câu hỏi hướng tới, nên bằng chứng chỉ hỗ trợ một phần. C lấy được p111 thuộc Ch4.
+- **Cách đọc tỷ lệ chấp nhận 91/92:**
+  - Đây **không phải độ đồng thuận giữa hai người chấm độc lập**, vì người kiểm duyệt đã thấy nhãn và lý do của LLM. Không tính Cohen's kappa.
+  - Khoảng 64/92 mục gần như tất định: cả 10 chunk A bắt đầu giữa từ, và metadata đã được máy kiểm tra trước 54/54. Vì vậy tỷ lệ chấp nhận cao phần lớn phản ánh độ dễ của mục, chứ không chứng minh chất lượng nhãn.
+  - Phần cần phán đoán thật là grounding và coherence của B, và chỗ sửa duy nhất nằm đúng ở nhóm này.
+  - Rủi ro: thiên lệch tự động hóa (người kiểm duyệt có xu hướng chấp nhận đầu ra của máy).
 
 ## Phân tích và kết luận
 
@@ -104,12 +167,40 @@ _Bảng do `python -m scripts.summarize_audit` sinh từ nhãn trong `starter/re
 - **B trượt vì pha loãng ngữ nghĩa.** Trần của B là 16/16, nhưng ở 5 câu dev (q01, q04, q05, q12, q14), B lấy đúng trang gold mà **sai chunk**. Chunk chứa evidence (khoảng 700–950 ký tự) xếp hạng thấp hơn một chunk khác cùng trang, vì câu evidence chỉ chiếm một phần nhỏ trong vector của chunk dài.
 - **Biến số bị gộp:** A–B đổi cùng lúc *cấu trúc* và *kích thước* (trung vị 500 so với 732 ký tự). Vì vậy không tách được phần nào do cấu trúc, phần nào do kích thước.
 - **Thiên lệch trong thiết kế:** evidence là câu trọn vẹn, nên về cấu trúc đã có lợi cho B.
-- **Theo nhãn audit (LLM judge):** coherence trung bình A 1,00/2 (10/10 chunk ở mức 1, đều bắt đầu giữa từ hoặc giữa câu) so với B 1,70/2 (7 chunk mức 2, 3 chunk mức 1 vì thiếu ngữ cảnh ở đầu đoạn). Grounding A có 1 nhãn 0 (q18, top-3 không nói gì về giá sàn/dư thừa) và 2 nhãn 1 (q19 do mệnh đề điều kiện bị cắt giữa từ; q21 chỉ có gợi ý gián tiếp về mất việc), còn B toàn nhãn 2. Metadata không phát hiện lỗi nào ở 54/54 bản ghi; riêng 10 bản ghi nằm sát heading (p82, p112, p341; gồm các cửa sổ A và chunk B) có section đúng vì cửa sổ nằm hẳn trước hoặc sau heading, nên rủi ro sai section của A chưa xảy ra trong mẫu này.
-- **Lưu ý:** ở q21 grounding của B/C là 2 vì chunk hạng 2 (p348) nêu rõ lượng lao động thuê ở mức lương công đoàn nhỏ hơn mức cân bằng, dù Evidence Hit@3 của q21 vẫn là trượt (các con số Hit giữ nguyên).
+- **Theo nhãn audit:**
+  - **Coherence:** trung bình A 1,00/2 (10/10 chunk ở mức 1, đều bắt đầu giữa từ hoặc giữa câu) so với B 1,70/2 (7 chunk mức 2, 3 chunk mức 1 vì đầu đoạn nhắc tới ý phía trước).
+  - **Grounding của A:** 1 nhãn 0 (q18: top-3 không nói gì về giá sàn và dư thừa) và 2 nhãn 1 (q19: mệnh đề điều kiện bị cắt giữa từ; q21: chỉ có gợi ý gián tiếp).
+  - **Grounding của B:** LLM cho cả 6 câu mức 2. Sau kiểm duyệt, q19 hạ xuống mức 1, nên trung bình còn 1,83/2.
+  - **Metadata:** không phát hiện lỗi nào ở 54/54 bản ghi. 10 bản ghi nằm sát heading (p82, p112, p341; gồm cửa sổ A và chunk B) vẫn có section đúng, vì cửa sổ nằm hẳn trước hoặc sau heading. Rủi ro sai section của A vì thế chưa xảy ra trong mẫu này.
+- **Lưu ý:** ở q21, grounding của B/C là 2, vì chunk hạng 2 (p348) nêu rõ lượng lao động thuê ở mức lương công đoàn nhỏ hơn mức cân bằng. Dù vậy, Evidence Hit@3 chặt của q21 vẫn tính là trượt (xem chỉ số phụ "bằng chứng tương đương" ở phần Kết quả).
+
+**Thí nghiệm hậu kiểm B500: tách *cấu trúc* khỏi *kích thước* (chỉ chạy trên dev, KHÔNG dùng để chọn chiến lược):**
+- **Thiết kế:** thêm sau khi đã xem kết quả dev và test, để trả lời câu hỏi mà cặp A–B để ngỏ. B500 giống hệt B (theo đoạn và heading, ghép đoạn bị cắt) nhưng tối đa 500 ký tự. Kết quả: 628 chunk, trung vị 374 ký tự, tối đa 540, trần evidence dev 16/16. Code **từ chối chạy ablation trên test**, vì test đã dùng rồi. File: [traces/ablation_dev.jsonl](../../starter/results/traces/ablation_dev.jsonl), [metrics_ablation_dev.csv](../../starter/results/metrics_ablation_dev.csv).
+- **Kết quả dev:**
+
+  | Cấu hình | Hit@1 | Hit@3 | Chunk |
+  |---|---|---|---|
+  | A | 8/16 | 9/16 | 521 |
+  | B | 7/16 | 8/16 | 326 |
+  | **B500** | **10/16** | **13/16** | 628 |
+
+  Khi chạy lại cùng lượt, A và B cho top-3 **giống hệt** lần chạy gốc, tức pipeline tất định.
+- **Diễn giải:**
+  - So với B, B500 cứu thêm 5 câu (q01, q03, q04, q12, q14) và không mất câu nào. Chính các câu B trượt vì "đúng trang, sai chunk" (q01, q04, q12, q14) giờ thành hit. Điều này ủng hộ giả thuyết **pha loãng ngữ nghĩa** ở chunk dài.
+  - So với A, B500 hơn 4 câu, nhờ không cắt evidence (q08, q10, q11, q12 không còn trượt vì evidence bị cắt).
+  - Vậy trên corpus này, **cấu trúc có ích khi kích thước nhỏ**. Cặp A–B gốc kém vì B quá dài, không phải vì chia theo đoạn.
+- **Giới hạn:**
+  - Đây là kết quả hậu kiểm trên dev: không có test độc lập, và mẫu chỉ 16 câu.
+  - B500 có kích thước *nhỏ hơn hoặc bằng* A, chứ không bằng đúng A (trung vị 374 so với 500), nên vẫn còn một phần nhiễu do kích thước.
+  - B500 vẫn trượt cả 3 câu filter dev. Bổ sung filter cho B500 là bước tiếp theo, chưa được kiểm chứng.
+  - **Lựa chọn chính thức vẫn là C** theo quy tắc đã chốt trước.
 
 **So sánh B–C (chỉ đổi filter):**
 - C ≥ B ở mọi tập con: dev 9/16 so với 8/16, test 5/6 so với 4/6. Toàn bộ chênh lệch nằm ở các câu filter, vì C giống hệt B ở câu không có filter.
-- **Nhãn grounding B và C đều là 6/6 mức 2 (trung bình 2,00/2), nên theo nhãn không có khác biệt grounding giữa B và C; khác biệt chỉ nằm ở Evidence Hit@3 tự động (q19).**
+- **Grounding B và C:**
+  - Trước kiểm duyệt (nhãn LLM), cả hai đều 6/6 mức 2, nên không có khác biệt.
+  - Sau kiểm duyệt, B q19 chỉ được 1, vì evidence của B thuộc Ch3, ngoài ngữ cảnh Ch4 của câu hỏi. C q19 vẫn được 2, vì C lấy được p111 của Ch4. Kết quả: B 1,83/2, C 2,00/2.
+  - Như vậy, khác biệt grounding giữa B và C nằm đúng ở câu filter mà C được thiết kế để sửa, khớp với chênh lệch Evidence Hit@3 trên q19.
 - **Distractor dự đoán trước đã thực sự xuất hiện** ở q05 (A), q09 (A, B), q13 (A, B), q19 (A, B).
 - Filter **không** cứu được q05 và q09: lỗi ở đó là xếp hạng **trong cùng chương**, không phải nhầm chương. Ở q09, C lấy p105 (lương tối thiểu *dưới* mức cân bằng) thay vì p104 (living wage *trên* mức cân bằng).
 
@@ -122,7 +213,7 @@ _Bảng do `python -m scripts.summarize_audit` sinh từ nhãn trong `starter/re
    - Chunk chứa định nghĩa (`…-005`, 946 ký tự) không vào top-3.
    - A cũng trượt câu này, nhưng vì lý do khác: cửa sổ A cắt đôi câu evidence (*"…nefits) for a worker than the value of their marginal productivity…"*).
 
-Thêm một ví dụ: **q21 (test)** trượt Evidence Hit@3 ở cả 3 chiến lược. B/C lấy p348, nhưng top-1 là chunk về năng suất của công nhân công đoàn, và không chunk nào chứa nguyên câu evidence "hire less labor". Chunk hạng 2 (p348) có câu tương đương (Qd < Qe), nên grounding được 2 dù hit theo định nghĩa chặt là trượt. Đây là ví dụ về chỗ Hit@3 tự động đánh giá thấp chất lượng bằng chứng. Câu hỏi diễn đạt lại (paraphrase) vẫn là điểm yếu chung.
+Thêm một ví dụ: **q21 (test)** trượt Evidence Hit@3 ở cả 3 chiến lược. B/C lấy p348, nhưng top-1 là chunk về năng suất của công nhân công đoàn, và không chunk nào chứa nguyên câu evidence "hire less labor". Chunk hạng 2 (p348) có câu tương đương (Qd < Qe), nên grounding được 2 dù hit theo định nghĩa chặt là trượt. Khi tính cả bằng chứng tương đương đã xác nhận, q21 thành hit với B và C (test Hit@3: B 5/6, C 6/6). Đây là ví dụ về chỗ Hit@3 chặt đánh giá thấp chất lượng bằng chứng. Câu hỏi diễn đạt lại (paraphrase) vẫn là điểm yếu chung.
 
 **Chiến lược chọn, đánh đổi, điều kiện áp dụng:**
 - **Chọn C theo quy tắc đã chốt:** hòa ở Hit@3 và Hit@1 trong ngưỡng ±1 câu → ít chunk hơn (326 so với 521) → thắng B trên câu filter.
@@ -134,16 +225,19 @@ Thêm một ví dụ: **q21 (test)** trượt Evidence Hit@3 ở cả 3 chiến 
 **Hạn chế:**
 - **Mẫu nhỏ:** 16 dev, 6 test, 5 câu filter. Một câu tương đương 6,25 điểm % trên dev và 16,7 điểm % trên test. Không chênh lệch nào ở đây có ý nghĩa thống kê.
 - **Câu hỏi:** do tác giả viết khi đã biết trang gold, nên cách diễn đạt có thể vô tình thuận lợi cho truy xuất. q09 (dev) và q18 (test) cùng nói về giá sàn, nên có rò rỉ nhẹ (đã ghi lại).
-- **Nhãn:** do một LLM judge (Claude Sonnet 5.5) chấm, chỉ một người chấm, không đo được độ đồng thuận giữa người chấm; nhãn chưa được người thật xem xét trừ khi học viên điền dòng "Học viên xem xét lại nhãn" ở trên. Bảng nhãn có thể lệch theo thiên lệch của LLM judge (ví dụ cho điểm grounding 2 khi bằng chứng tương đương nằm ở trang khác).
+- **Nhãn:**
+  - Chỉ có một người gán nhãn chính là LLM judge. Học viên kiểm duyệt nhưng đã thấy nhãn và lý do của LLM, nên đây **không phải chú thích độc lập**: không đo được độ đồng thuận giữa hai người chấm, và có rủi ro thiên lệch tự động hóa.
+  - Tỷ lệ chấp nhận 91/92 phần lớn đến từ các mục gần như tất định, nên không chứng minh được chất lượng nhãn.
+  - Các trường hợp ranh giới phụ thuộc người chấm. Ví dụ B q19: LLM cho 2, người kiểm duyệt cho 1, vì evidence nằm ở chương khác với ngữ cảnh câu hỏi.
 - **Đo thời gian:** một lần chạy, trên CPU, có tính cả thời gian mở kết nối DB.
 - **Bỏ qua hình:** nội dung trong đồ thị không được trích. Câu nằm vắt qua hai trang bị cắt.
 
 **Nếu làm lại hoặc mở rộng:**
-1. Thêm cấu hình **B500**: theo đoạn nhưng tối đa 500 ký tự, để tách riêng ảnh hưởng của *cấu trúc* và *kích thước*. Thí nghiệm này phải chạy trên bộ test mới; nếu chạy trên test hiện tại thì phải ghi rõ là phân tích hậu kiểm.
+1. **Xác nhận B500 trên bộ test mới.** Trên dev, B500 đã cho thấy tín hiệu mạnh (13/16 so với 8/16 của B). Bước tiếp theo là chốt trước cấu hình "B500 + filter chương" như một ứng viên, viết bộ test mới chưa ai xem, rồi chạy một lần.
 2. Ghép câu vắt qua hai trang bằng chunk có `page_start`/`page_end`, kèm định nghĩa hit theo khoảng trang.
 3. Thêm tiền tố ngữ cảnh (tên chương/mục) khi embed để giảm pha loãng; hoặc hybrid BM25 + dense cho các câu có từ khóa đặc thù như "first rule".
-4. Mở rộng lên 50 câu trở lên và có người chấm thứ hai để đo độ đồng thuận.
+4. Mở rộng lên 50 câu trở lên. Cho hai người chấm làm **mù hoàn toàn**: không thấy nhãn hay tổng hợp của nhau, và không biết chunk thuộc chiến lược nào. Sau đó báo Cohen's kappa.
 
 **Sử dụng AI:** dùng Claude Code (Claude Opus 5.5) để giải thích, viết code pipeline và soạn nháp báo cáo.
 - **Cách kiểm tra:** evidence kiểm chứng tự động trên text đã chuẩn hóa; self-check chunk (offset chính xác, không mất ký tự); kiểm tra nạp lại và sửa tài liệu; đọc lại trace của từng ca trượt để xác nhận đó là lỗi truy xuất thật, không phải lỗi code đánh giá.
-- **Nhãn coherence, metadata và grounding** do một LLM judge chấm (Claude Sonnet 5.5, qua subagent của Claude Code, ngày 13/11/2026) theo thang trong GUIDE.md mục 4, kèm lý do từng nhãn; phương pháp, đầu vào của người chấm và rủi ro được mô tả ở mục "Trace, nhãn thủ công và cách chọn mẫu". Metadata được đối chiếu với `pages.jsonl` và với PDF (54/54 bản ghi). Học viên cần xem xét lại nhãn; trạng thái xem xét ghi ở mục đó.
+- **Nhãn coherence, metadata và grounding** do một LLM judge chấm (Claude Sonnet 5.5, qua subagent của Claude Code, ngày 13/11/2026) theo thang trong GUIDE.md mục 4, kèm lý do từng nhãn; phương pháp, đầu vào của người chấm và rủi ro được mô tả ở mục "Trace, nhãn audit và cách chọn mẫu". Metadata được LLM đối chiếu với `pages.jsonl` và với PDF (54/54 bản ghi). Học viên kiểm duyệt toàn bộ 92 nhãn (chấp nhận 91, sửa 1) và ghi quyết định vào `human_review.csv`. Ghi chú tiếng Việt trong file được diễn đạt lại từ lý do của LLM. Bảng nhãn và tỷ lệ chấp nhận do script tính, không ghi tay. Thí nghiệm hậu kiểm B500 và chỉ số "bằng chứng tương đương" do Claude Code đề xuất và chạy, sau khi đã có kết quả; cả hai được đánh dấu rõ là phân tích phụ.

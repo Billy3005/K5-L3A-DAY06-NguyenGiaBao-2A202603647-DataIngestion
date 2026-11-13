@@ -34,8 +34,13 @@ python -m scripts.reingest_check               # kiểm tra tài liệu bị s�
 python -m src.run evaluate --split dev
 python -m src.run select                       # áp tiêu chí đã chốt -> results/selection.json
 python -m src.run evaluate --split test        # bị từ chối nếu chưa có selection.json
-python -m scripts.make_audit_sheets            # phiếu chấm thủ công (không điền nhãn)
-python -m scripts.summarize_audit              # tổng hợp nhãn -> bảng trong báo cáo
+python -m scripts.make_audit_sheets            # phiếu chấm (LLM judge điền; KHÔNG chạy lại sau khi đã có nhãn: sẽ ghi đè)
+python -m scripts.summarize_audit              # nhãn LLM + kiểm duyệt của học viên (human_review.csv) -> bảng trong báo cáo
+python -m scripts.equivalent_hits              # chỉ số phụ: Hit có bằng chứng tương đương (học viên xác nhận)
+
+# Hậu kiểm (sau khi đã xem kết quả; chỉ dev, không dùng để chọn chiến lược)
+python -m src.run ingest --index B500
+python -m src.run evaluate --split dev --ablation   # chạy trên test bị từ chối
 python -m src.run query --strategy C --chapter 4 "What is a usury law?"
 ```
 
@@ -48,7 +53,7 @@ Nếu `extract_pages` hoặc `make_chunks` được chạy lại, kết quả l�
 | `data/` | manifest nguồn và trang (`starter/data/processed/pages.jsonl` là text đã chuẩn hóa, có ghi nguồn) |
 | `benchmark/` | `questions.jsonl` và README (thiết kế, tiêu chí chọn và mẫu chấm đã chốt trước) |
 | `artifacts/experiment_log.csv` | cấu hình, giả thuyết và Hit@1/Hit@3 của A/B/C |
-| `starter/results/` | trace, metrics, thống kê chunk, log ingest, nhãn audit (xem README trong thư mục) |
+| `starter/results/` | trace, metrics, thống kê chunk, log ingest, nhãn audit (xem README trong thư mục; `results/` ở gốc chỉ trỏ tới đây) |
 
 Mốc commit chứng minh thứ tự làm việc: `edf32b9` khóa benchmark → `b073092` chọn chiến lược trên dev → `f81eec1` chạy test một lần.
 

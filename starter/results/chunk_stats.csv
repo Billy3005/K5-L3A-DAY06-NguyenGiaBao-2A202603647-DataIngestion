@@ -1,3 +1,4 @@
-strategy,params,chunks,total_chars,len_min,len_median,len_mean,len_max,tokens_total,tokens_max,over_token_limit,starts_mid_word,repaired_paragraph_splits
-A,"{""chunking"": ""fixed"", ""size"": 500, ""overlap"": 50}",521,243562,51,500,467,500,58283,150,0,274,0
-B,"{""chunking"": ""paragraph"", ""max_size"": 1000}",326,220964,43,732,678,1007,52022,277,0,0,61
+strategy,post_hoc,params,chunks,total_chars,len_min,len_median,len_mean,len_max,tokens_total,tokens_max,over_token_limit,starts_mid_word,repaired_paragraph_splits
+A,False,"{""chunking"": ""fixed"", ""size"": 500, ""overlap"": 50}",521,243562,51,500,467,500,58283,150,0,274,0
+B,False,"{""chunking"": ""paragraph"", ""max_size"": 1000}",326,220964,43,732,678,1007,52022,277,0,0,61
+B500,True,"{""chunking"": ""paragraph"", ""max_size"": 500}",628,220718,43,374,351,540,53235,153,0,2,75
