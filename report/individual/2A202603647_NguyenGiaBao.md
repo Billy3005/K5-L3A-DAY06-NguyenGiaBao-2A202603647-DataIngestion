@@ -99,6 +99,7 @@
 - **Nạp lại cùng corpus:** 0 chunk embed lại, 0 dòng mới, `count(*) = count(DISTINCT chunk_id)`.
 - **Tài liệu bị sửa** (mô phỏng p85 trong namespace riêng): 2 chunk cập nhật, 2 chunk cũ bị xóa, 5 giữ nguyên.
 - Thời gian là một lần chạy trên CPU laptop, chỉ mang tính tham khảo. Thời gian truy vấn bao gồm cả việc mở kết nối DB cho mỗi truy vấn.
+- **Tái lập từ bản clone sạch:** chạy lại toàn bộ lệnh trong README cho ra manifest, text và chunk giống từng byte, trace dev/test giống hệt (bỏ qua thời gian truy vấn), và cùng mọi con số Hit ([chi tiết](../../starter/results/README.md#reproducibility-check-from-a-clean-clone-2026-11-13)).
 
 **Chỉ số phụ: Hit có tính bằng chứng tương đương.** GUIDE tính hit khi chunk chứa evidence đã ghi *"hoặc bằng chứng tương đương được người chấm xác nhận"*. Chỉ số chính ở trên dùng định nghĩa chặt, chốt trước khi chạy, và **không thay đổi**. Bảng dưới tính lại từ chính các trace, cộng thêm các câu tương đương trong [equivalent_evidence.jsonl](../../starter/results/audit/equivalent_evidence.jsonl):
 - Các câu này được thêm **sau khi xem kết quả**: hiện chỉ có 1 câu cho q21 ở p348, phát hiện khi chấm grounding.

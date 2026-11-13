@@ -38,6 +38,20 @@ A takes longer to embed than B because it has 60% more chunks, even though each 
 
 **Changed documents** (`reingest_check.txt`): when page 85 is edited (one value changed, second half removed), 2 chunks are updated, 2 obsolete chunks are deleted and 5 stay unchanged, so the rows in the DB equal the new chunk set. The upsert and the obsolete-chunk deletion run in one transaction. Removing a whole document requires an explicit delete by `document_id`; that case is not exercised here.
 
+## Reproducibility check from a clean clone (2026-11-13)
+
+Steps: `git clone` of the committed repo into an empty folder, then copy `.env` and the sha256-verified PDF. In the clone, run every step listed in the root README: `fetch_corpus`, `build_manifest`, `extract_pages`, `verify_benchmark`, `make_chunks`, `src.run ingest`, `evaluate --split dev`, `evaluate --split test`, `summarize_audit`, `equivalent_hits`.
+
+| Check | Result |
+|---|---|
+| Manifests, `pages.jsonl`, `chunks/{A,B,B500}.jsonl`, `chunk_stats.csv` | Byte-identical to the committed files (`git diff` empty) |
+| Re-ingest into the existing index | A 521 and B 326 chunks, 0 embedded / inserted / updated / deleted |
+| Dev and test traces | Identical to the committed traces for 48 dev and 18 test records, ignoring the `search_ms` timing field |
+| Hit@1 / Hit@3 | Same n/N for every strategy and split |
+| Audit tables injected into the report | Identical |
+
+The test split was re-run here only to check reproducibility. No configuration was changed.
+
 ## Ingestion and extraction log (78 pages)
 
 | Item | Count | Handling |
