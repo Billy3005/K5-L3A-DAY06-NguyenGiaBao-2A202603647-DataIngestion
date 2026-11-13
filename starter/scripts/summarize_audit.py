@@ -76,7 +76,8 @@ def main() -> None:
              "|---|---|---|---|---|"]
     table += [f"| {r['strategy']}{' (dùng chunk B)' if r['strategy'] == 'C' else ''} | {r['coherence']} | {r['metadata']} | {r['filter']} | {r['grounding']} |"
               for r in rows]
-    block = "\n".join(table) + "\n\n_Bảng do `python -m scripts.summarize_audit` sinh từ nhãn thủ công trong `starter/results/audit/`._"
+    block = "\n".join(table) + ("\n\n_Bảng do `python -m scripts.summarize_audit` sinh từ nhãn trong "
+                                "`starter/results/audit/` (người chấm và phương pháp: xem mục ngay dưới)._")
     (RESULTS / "audit_summary.md").write_text(block + "\n", encoding="utf-8")
     if REPORT.exists():
         text = REPORT.read_text(encoding="utf-8")
