@@ -11,17 +11,14 @@ from dataclasses import asdict
 
 from transformers import AutoTokenizer
 
-from src.chunking import by_paragraph, fixed_size
+from src.chunking import build_chunks
 from src.config import EMBEDDING_MAX_TOKENS, EMBEDDING_MODEL, PAGES_JSONL, PASSAGE_PREFIX, RESULTS, STRATEGIES
 from src.ingestion import read_pages_jsonl
 from src.models import Chunk, DocumentPage
 
 
 def build(name: str, pages: list[DocumentPage]) -> list[Chunk]:
-    cfg = STRATEGIES[name]
-    if cfg["chunking"] == "fixed":
-        return [c for p in pages for c in fixed_size(p, cfg["size"], cfg["overlap"])]
-    return [c for p in pages for c in by_paragraph(p, cfg["max_size"])]
+    return build_chunks(pages, STRATEGIES[name])
 
 
 def self_check(name: str, pages: list[DocumentPage], chunks: list[Chunk]) -> None:

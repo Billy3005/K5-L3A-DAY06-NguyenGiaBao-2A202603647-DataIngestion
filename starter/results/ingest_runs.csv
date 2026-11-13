@@ -1,0 +1,5 @@
+run_at,index,chunks,embedded,inserted,updated,unchanged,deleted,rows_in_db,chunk_s,embed_s,db_s,total_s,cost_usd,model,device
+2026-11-13T07:55:12+00:00,A,521,521,521,0,0,0,521,0.01,70.22,1.64,71.87,0.0,intfloat/multilingual-e5-base,"cpu (Intel64 Family 6 Model 154 Stepping 3, GenuineIntel)"
+2026-11-13T07:56:14+00:00,B,326,326,326,0,0,0,326,0.01,60.05,1.33,61.39,0.0,intfloat/multilingual-e5-base,"cpu (Intel64 Family 6 Model 154 Stepping 3, GenuineIntel)"
+2026-11-13T07:56:59+00:00,A,521,0,0,0,521,0,521,0.01,0.11,0.09,0.2,0.0,intfloat/multilingual-e5-base,"cpu (Intel64 Family 6 Model 154 Stepping 3, GenuineIntel)"
+2026-11-13T07:56:59+00:00,B,326,0,0,0,326,0,326,0.01,0.05,0.14,0.19,0.0,intfloat/multilingual-e5-base,"cpu (Intel64 Family 6 Model 154 Stepping 3, GenuineIntel)"

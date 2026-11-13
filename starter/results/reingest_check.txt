@@ -1,0 +1,5 @@
+1. first ingest      {'chunks': 9, 'embedded': 9, 'inserted': 9, 'updated': 0, 'unchanged': 0, 'deleted': 0, 'rows_in_db': 9}
+2. re-ingest same    {'chunks': 9, 'embedded': 0, 'inserted': 0, 'updated': 0, 'unchanged': 9, 'deleted': 0, 'rows_in_db': 9}
+3. ingest edited p85 {'chunks': 7, 'embedded': 2, 'inserted': 0, 'updated': 2, 'unchanged': 5, 'deleted': 2, 'rows_in_db': 7}
+   rows_in_db == chunks of edited corpus (7): True
+4. cleanup -> rows in 'reload_check': 0

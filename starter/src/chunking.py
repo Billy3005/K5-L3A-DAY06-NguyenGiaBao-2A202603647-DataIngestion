@@ -73,6 +73,15 @@ def fixed_size(page: DocumentPage, size: int, overlap: int) -> list[Chunk]:
     return chunks
 
 
+def build_chunks(pages: list[DocumentPage], cfg: dict[str, Any]) -> list[Chunk]:
+    """Chunk the whole corpus with one strategy configuration (see config.STRATEGIES)."""
+    if cfg["chunking"] == "fixed":
+        return [c for p in pages for c in fixed_size(p, cfg["size"], cfg["overlap"])]
+    if cfg["chunking"] == "paragraph":
+        return [c for p in pages for c in by_paragraph(p, cfg["max_size"])]
+    raise ValueError(f"unknown chunking {cfg['chunking']}")
+
+
 def _repair_paragraphs(spans: list[dict[str, Any]]) -> list[dict[str, Any]]:
     """Merge text blocks that PyMuPDF split mid-sentence (prev has no terminal
     punctuation and next starts lowercase) back into one paragraph."""
