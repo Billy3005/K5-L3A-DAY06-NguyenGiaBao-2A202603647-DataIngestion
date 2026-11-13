@@ -10,6 +10,11 @@ Excerpts of chunk text in this folder come from *Principles of Microeconomics 3e
 | `chunk_stats.csv` | `python -m scripts.make_chunks` | Chunk count, length and token distribution, mid-word starts, repaired splits |
 | `ingest_runs.csv` | `python -m src.run ingest` | One row per index per run: inserted/updated/unchanged/deleted, rows in DB, timings, cost |
 | `reingest_check.txt` | `python -m scripts.reingest_check` | Changed-document test in an isolated namespace |
+| `traces/{dev,test}.jsonl` | `python -m src.run evaluate --split …` | Per strategy × question: filter in question vs applied, gold, full top-3 (chunk id, text, score, page, chapter, section, offsets), hit flags, split-evidence flag |
+| `metrics_{dev,test}.csv` | same | Hit@1 / Evidence Hit@3 as n/N per strategy, overall, per type and for filter questions |
+| `selection.json` | `python -m src.run select` | Strategy chosen by the pre-registered dev-only rule (committed before test) |
+| `audit/*.csv`, `audit/REVIEW.md` | `python -m scripts.make_audit_sheets` | Manual labeling sheets (coherence, metadata, grounding); labels by the author |
+| `audit_summary.md` | `python -m scripts.summarize_audit` | Aggregated manual labels; also injected into the report |
 
 ## Storage and ingestion
 
