@@ -1,0 +1,265 @@
+﻿strategy,id,type,question,filter_applied,expected_answer,gold_page,evidence_quote,auto_evidence_hit3_proxy,top3_text,label_0_1_2,reason
+A,q17,direct,"Under the rent control example, if demand rises but rent is held at $500, how many units are supplied and demanded?",,"Quantity supplied stays at 15,000 units while quantity demanded is 19,000 units, creating a shortage.",84,"At that price ($500), the quantity supplied remains at the same 15,000 rental units, but the quantity demanded is 19,000 rental units.",True,"[#1 p84 ch3 micro3e-p0084-fx500o50-002]
+ent control law. However, the underlying forces that shifted the demand curve to
+
+the right are still there. At that price ($500), the quantity supplied remains at the same 15,000 rental units, but the quantity demanded is 19,000 rental units. In other words, the quantity demanded exceeds the quantity supplied, so there is a shortage of rental housing. One of the ironies of price ceilings is that while the price ceiling was intended to help renters, there are actually fewer apartments rented out
+
+[#2 p84 ch3 micro3e-p0084-fx500o50-001]
+iginal Quantity Demanded New Quantity Demanded
+
+$400 12,000 18,000 23,000
+
+$500 15,000 15,000 19,000
+
+$600 17,000 13,000 17,000
+
+$700 19,000 11,000 15,000
+
+$800 20,000 10,000 14,000
+
+TABLE 3.7 Rent Control
+
+Suppose that a city government passes a rent control law to keep the price at the original equilibrium of $500 for a typical apartment. In Figure 3.21, the horizontal line at the price of $500 shows the legally fixed maximum price set by the rent control law. However, the underlying forces th
+
+[#3 p84 ch3 micro3e-p0084-fx500o50-000]
+FIGURE 3.21 A Price Ceiling Example-Rent Control The original intersection of demand and supply occurs at E0. If
+
+demand shifts from D0 to D1, the new equilibrium would be at E1-unless a price ceiling prevents the price from rising. If the price is not permitted to rise, the quantity supplied remains at 15,000. However, after the change in demand, the quantity demanded rises to 19,000, resulting in a shortage.
+
+Price Original Quantity Supplied Original Quantity Demanded New Quantity Demanded
+
+$4",,
+B,q17,direct,"Under the rent control example, if demand rises but rent is held at $500, how many units are supplied and demanded?",,"Quantity supplied stays at 15,000 units while quantity demanded is 19,000 units, creating a shortage.",84,"At that price ($500), the quantity supplied remains at the same 15,000 rental units, but the quantity demanded is 19,000 rental units.",True,"[#1 p84 ch3 micro3e-p0084-pb1000-001]
+Suppose that a city government passes a rent control law to keep the price at the original equilibrium of $500 for a typical apartment. In Figure 3.21, the horizontal line at the price of $500 shows the legally fixed maximum price set by the rent control law. However, the underlying forces that shifted the demand curve to
+
+the right are still there. At that price ($500), the quantity supplied remains at the same 15,000 rental units, but the quantity demanded is 19,000 rental units. In other words, the quantity demanded exceeds the quantity supplied, so there is a shortage of rental housing. One of the ironies of price ceilings is that while the price ceiling was intended to help renters, there are actually fewer apartments rented out under the price ceiling (15,000 rental units) than would be the case at the market rent of $600 (17,000 rental units).
+
+[#2 p84 ch3 micro3e-p0084-pb1000-000]
+FIGURE 3.21 A Price Ceiling Example-Rent Control The original intersection of demand and supply occurs at E0. If
+
+demand shifts from D0 to D1, the new equilibrium would be at E1-unless a price ceiling prevents the price from rising. If the price is not permitted to rise, the quantity supplied remains at 15,000. However, after the change in demand, the quantity demanded rises to 19,000, resulting in a shortage.
+
+Price Original Quantity Supplied Original Quantity Demanded New Quantity Demanded
+
+$400 12,000 18,000 23,000
+
+$500 15,000 15,000 19,000
+
+$600 17,000 13,000 17,000
+
+$700 19,000 11,000 15,000
+
+$800 20,000 10,000 14,000
+
+TABLE 3.7 Rent Control
+
+[#3 p83 ch3 micro3e-p0083-pb1000-003]
+Rent control becomes a politically hot topic when rents begin to rise rapidly. Everyone needs an affordable place to live. Perhaps a change in tastes makes a certain suburb or town a more popular place to live. Perhaps locally-based businesses expand, bringing higher incomes and more people into the area. Such changes can cause a change in the demand for rental housing, as Figure 3.21 illustrates. The original equilibrium (E0) lies at the intersection of supply curve S0 and demand curve D0, corresponding to an equilibrium price of $500 and an equilibrium quantity of 15,000 units of rental housing. The effect of greater income or a change in tastes is to shift the demand curve for rental housing to the right, as the data in Table 3.7 shows and the shift from D0 to D1 on the graph. In this market, at the new equilibrium E1, the price of a rental unit would rise to $600 and the equilibrium quantity would increase to 17,000 units.",,
+C,q17,direct,"Under the rent control example, if demand rises but rent is held at $500, how many units are supplied and demanded?",,"Quantity supplied stays at 15,000 units while quantity demanded is 19,000 units, creating a shortage.",84,"At that price ($500), the quantity supplied remains at the same 15,000 rental units, but the quantity demanded is 19,000 rental units.",True,"[#1 p84 ch3 micro3e-p0084-pb1000-001]
+Suppose that a city government passes a rent control law to keep the price at the original equilibrium of $500 for a typical apartment. In Figure 3.21, the horizontal line at the price of $500 shows the legally fixed maximum price set by the rent control law. However, the underlying forces that shifted the demand curve to
+
+the right are still there. At that price ($500), the quantity supplied remains at the same 15,000 rental units, but the quantity demanded is 19,000 rental units. In other words, the quantity demanded exceeds the quantity supplied, so there is a shortage of rental housing. One of the ironies of price ceilings is that while the price ceiling was intended to help renters, there are actually fewer apartments rented out under the price ceiling (15,000 rental units) than would be the case at the market rent of $600 (17,000 rental units).
+
+[#2 p84 ch3 micro3e-p0084-pb1000-000]
+FIGURE 3.21 A Price Ceiling Example-Rent Control The original intersection of demand and supply occurs at E0. If
+
+demand shifts from D0 to D1, the new equilibrium would be at E1-unless a price ceiling prevents the price from rising. If the price is not permitted to rise, the quantity supplied remains at 15,000. However, after the change in demand, the quantity demanded rises to 19,000, resulting in a shortage.
+
+Price Original Quantity Supplied Original Quantity Demanded New Quantity Demanded
+
+$400 12,000 18,000 23,000
+
+$500 15,000 15,000 19,000
+
+$600 17,000 13,000 17,000
+
+$700 19,000 11,000 15,000
+
+$800 20,000 10,000 14,000
+
+TABLE 3.7 Rent Control
+
+[#3 p83 ch3 micro3e-p0083-pb1000-003]
+Rent control becomes a politically hot topic when rents begin to rise rapidly. Everyone needs an affordable place to live. Perhaps a change in tastes makes a certain suburb or town a more popular place to live. Perhaps locally-based businesses expand, bringing higher incomes and more people into the area. Such changes can cause a change in the demand for rental housing, as Figure 3.21 illustrates. The original equilibrium (E0) lies at the intersection of supply curve S0 and demand curve D0, corresponding to an equilibrium price of $500 and an equilibrium quantity of 15,000 units of rental housing. The effect of greater income or a change in tastes is to shift the demand curve for rental housing to the right, as the data in Table 3.7 shows and the shift from D0 to D1 on the graph. In this market, at the new equilibrium E1, the price of a rental unit would rise to $600 and the equilibrium quantity would increase to 17,000 units.",,
+A,q18,filter,What is the result when government policy keeps a price above the level the market would otherwise reach?,,"Quantity supplied exceeds quantity demanded, so a surplus exists (e.g., European wheat price supports).",85,"The result is a quantity supplied in excess of the quantity demanded (Qd). When quantity supplied exceeds quantity demanded, a surplus exists.",False,"[#1 p82 ch3 micro3e-p0082-fx500o50-005]
+ice controls, price ceilings, and price floors
+
+To this point in the chapter, we have been assuming that markets are free, that is, they operate with no government intervention. In this section, we will explore the outcomes, both anticipated and otherwise, when government does intervene in a market either to prevent the price of some good or service from rising ""too high"" or to prevent the price of some good or service from falling ""too low"".
+
+Economists believe there are a small number of funda
+
+[#2 p83 ch3 micro3e-p0083-fx500o50-001]
+ities. In some cases, discontent over prices turns into public pressure on politicians, who may then pass legislation to prevent a certain price from climbing ""too high"" or falling ""too low.""
+
+The demand and supply model shows how people and firms will react to the incentives that these laws provide to control prices, in ways that will often lead to undesirable consequences. Alternative policy tools can often achieve the desired goals of price control laws, while avoiding at least some of their 
+
+[#3 p112 ch4 micro3e-p0112-fx500o50-000]
+Many states do have usury laws, which impose an upper limit on the interest rate that lenders can charge. However, in many cases these upper limits are well above the market interest rate. For example, if the interest rate is not allowed to rise above 30% per year, it can still fluctuate below that level according to market forces. A price ceiling that is set at a relatively high level is nonbinding, and it will have no practical effect unless the equilibrium price soars high enough to exceed th",,
+B,q18,filter,What is the result when government policy keeps a price above the level the market would otherwise reach?,,"Quantity supplied exceeds quantity demanded, so a surplus exists (e.g., European wheat price supports).",85,"The result is a quantity supplied in excess of the quantity demanded (Qd). When quantity supplied exceeds quantity demanded, a surplus exists.",True,"[#1 p85 ch3 micro3e-p0085-pb1000-003]
+Figure 3.22 illustrates the effects of a government program that assures a price above the equilibrium by focusing on the market for wheat in Europe. In the absence of government intervention, the price would adjust so that the quantity supplied would equal the quantity demanded at the equilibrium point E0, with price P0 and quantity Q0. However, policies to keep prices high for farmers keep the price above what would have been the market equilibrium level-the price Pf shown by the dashed horizontal line in the diagram. The result is a quantity supplied in excess of the quantity demanded (Qd). When quantity supplied exceeds quantity demanded, a surplus exists.
+
+[#2 p83 ch3 micro3e-p0083-pb1000-000]
+demand and supply.
+
+Governments can pass laws affecting market outcomes, but no law can negate these economic principles. Rather, the principles will become apparent in sometimes unexpected ways, which may undermine the intent of the government policy. This is one of the major conclusions of this section.
+
+Controversy sometimes surrounds the prices and quantities established by demand and supply, especially for products that are considered necessities. In some cases, discontent over prices turns into public pressure on politicians, who may then pass legislation to prevent a certain price from climbing ""too high"" or falling ""too low.""
+
+The demand and supply model shows how people and firms will react to the incentives that these laws provide to control prices, in ways that will often lead to undesirable consequences. Alternative policy tools can often achieve the desired goals of price control laws, while avoiding at least some of their costs and tradeoffs.
+
+[#3 p112 ch4 micro3e-p0112-pb1000-000]
+Many states do have usury laws, which impose an upper limit on the interest rate that lenders can charge. However, in many cases these upper limits are well above the market interest rate. For example, if the interest rate is not allowed to rise above 30% per year, it can still fluctuate below that level according to market forces. A price ceiling that is set at a relatively high level is nonbinding, and it will have no practical effect unless the equilibrium price soars high enough to exceed the price ceiling.",,
+C,q18,filter,What is the result when government policy keeps a price above the level the market would otherwise reach?,"{""chapter"": 3}","Quantity supplied exceeds quantity demanded, so a surplus exists (e.g., European wheat price supports).",85,"The result is a quantity supplied in excess of the quantity demanded (Qd). When quantity supplied exceeds quantity demanded, a surplus exists.",True,"[#1 p85 ch3 micro3e-p0085-pb1000-003]
+Figure 3.22 illustrates the effects of a government program that assures a price above the equilibrium by focusing on the market for wheat in Europe. In the absence of government intervention, the price would adjust so that the quantity supplied would equal the quantity demanded at the equilibrium point E0, with price P0 and quantity Q0. However, policies to keep prices high for farmers keep the price above what would have been the market equilibrium level-the price Pf shown by the dashed horizontal line in the diagram. The result is a quantity supplied in excess of the quantity demanded (Qd). When quantity supplied exceeds quantity demanded, a surplus exists.
+
+[#2 p83 ch3 micro3e-p0083-pb1000-000]
+demand and supply.
+
+Governments can pass laws affecting market outcomes, but no law can negate these economic principles. Rather, the principles will become apparent in sometimes unexpected ways, which may undermine the intent of the government policy. This is one of the major conclusions of this section.
+
+Controversy sometimes surrounds the prices and quantities established by demand and supply, especially for products that are considered necessities. In some cases, discontent over prices turns into public pressure on politicians, who may then pass legislation to prevent a certain price from climbing ""too high"" or falling ""too low.""
+
+The demand and supply model shows how people and firms will react to the incentives that these laws provide to control prices, in ways that will often lead to undesirable consequences. Alternative policy tools can often achieve the desired goals of price control laws, while avoiding at least some of their costs and tradeoffs.
+
+[#3 p73 ch3 micro3e-p0073-pb1000-004]
+Government policies can affect the cost of production and the supply curve through taxes, regulations, and subsidies. For example, the U.S. government imposes a tax on alcoholic beverages that collects about $8 billion per year from producers. Businesses treat taxes as costs. Higher costs decrease supply for the reasons we discussed above. Other examples of policy that can affect cost are the wide array of government regulations that require firms to spend money to provide a cleaner environment or a safer workplace. Complying with
+
+regulations increases costs.",,
+A,q19,filter,What happens when a price ceiling is set below the equilibrium price?,,"In the credit card example, quantity demanded exceeds quantity supplied at the ceiling rate Rc, so there is a credit shortage and some willing borrowers cannot get cards.",111,"At the price ceiling (Rc), quantity demanded will exceed quantity supplied.",False,"[#1 p84 ch3 micro3e-p0084-fx500o50-005]
+he equilibrium level, quantity demanded exceeds quantity supplied, and thus a shortage occurs. Those who manage to purchase the product at the lower price given by the price ceiling will benefit, but sellers of the product will suffer, along with those who are not able to purchase the product at
+
+[#2 p112 ch4 micro3e-p0112-fx500o50-000]
+Many states do have usury laws, which impose an upper limit on the interest rate that lenders can charge. However, in many cases these upper limits are well above the market interest rate. For example, if the interest rate is not allowed to rise above 30% per year, it can still fluctuate below that level according to market forces. A price ceiling that is set at a relatively high level is nonbinding, and it will have no practical effect unless the equilibrium price soars high enough to exceed th
+
+[#3 p87 ch3 micro3e-p0087-fx500o50-005]
+adjusting to its equilibrium price and quantity, and thus will create an inefficient outcome. However, there is an additional twist here. Along with creating inefficiency, price floors and ceilings will also transfer some consumer surplus to producers, or some producer surplus to consumers.
+
+Imagine that several firms develop a promising but expensive new drug for treating back pain. If this therapy is left to the market, the equilibrium price will be $600 per month and 20,000 people will use th",,
+B,q19,filter,What happens when a price ceiling is set below the equilibrium price?,,"In the credit card example, quantity demanded exceeds quantity supplied at the ceiling rate Rc, so there is a credit shortage and some willing borrowers cannot get cards.",111,"At the price ceiling (Rc), quantity demanded will exceed quantity supplied.",False,"[#1 p84 ch3 micro3e-p0084-pb1000-003]
+Price ceilings are enacted in an attempt to keep prices low for those who need the product. However, when the market price is not allowed to rise to the equilibrium level, quantity demanded exceeds quantity supplied, and thus a shortage occurs. Those who manage to purchase the product at the lower price given by the price ceiling will benefit, but sellers of the product will suffer, along with those who are not able to purchase the product at
+
+[#2 p112 ch4 micro3e-p0112-pb1000-000]
+Many states do have usury laws, which impose an upper limit on the interest rate that lenders can charge. However, in many cases these upper limits are well above the market interest rate. For example, if the interest rate is not allowed to rise above 30% per year, it can still fluctuate below that level according to market forces. A price ceiling that is set at a relatively high level is nonbinding, and it will have no practical effect unless the equilibrium price soars high enough to exceed the price ceiling.
+
+[#3 p105 ch4 micro3e-p0105-pb1000-003]
+Let's suppose that the minimum wage lies just slightly below the equilibrium wage level. Wages could fluctuate according to market forces above this price floor, but they would not be allowed to move beneath the floor. In this situation, the price floor minimum wage is nonbinding -that is, the price floor is not determining the market outcome. Even if the minimum wage moves just a little higher, it will still have no effect on the quantity of employment in the economy, as long as it remains below the equilibrium wage. Even if the government increases the minimum wage by enough so that it rises slightly above the equilibrium wage and becomes binding, there will be only a small excess supply gap between the quantity demanded and quantity supplied.",,
+C,q19,filter,What happens when a price ceiling is set below the equilibrium price?,"{""chapter"": 4}","In the credit card example, quantity demanded exceeds quantity supplied at the ceiling rate Rc, so there is a credit shortage and some willing borrowers cannot get cards.",111,"At the price ceiling (Rc), quantity demanded will exceed quantity supplied.",True,"[#1 p112 ch4 micro3e-p0112-pb1000-000]
+Many states do have usury laws, which impose an upper limit on the interest rate that lenders can charge. However, in many cases these upper limits are well above the market interest rate. For example, if the interest rate is not allowed to rise above 30% per year, it can still fluctuate below that level according to market forces. A price ceiling that is set at a relatively high level is nonbinding, and it will have no practical effect unless the equilibrium price soars high enough to exceed the price ceiling.
+
+[#2 p105 ch4 micro3e-p0105-pb1000-003]
+Let's suppose that the minimum wage lies just slightly below the equilibrium wage level. Wages could fluctuate according to market forces above this price floor, but they would not be allowed to move beneath the floor. In this situation, the price floor minimum wage is nonbinding -that is, the price floor is not determining the market outcome. Even if the minimum wage moves just a little higher, it will still have no effect on the quantity of employment in the economy, as long as it remains below the equilibrium wage. Even if the government increases the minimum wage by enough so that it rises slightly above the equilibrium wage and becomes binding, there will be only a small excess supply gap between the quantity demanded and quantity supplied.
+
+[#3 p111 ch4 micro3e-p0111-pb1000-003]
+At the price ceiling (Rc), quantity demanded will exceed quantity supplied. Consequently, a number of people who want to have credit cards and are willing to pay the prevailing interest rate will find that companies are unwilling to issue cards to them. The result will be a credit shortage.
+
+FIGURE 4.8 Credit Card Interest Rates: Another Price Ceiling Example The original intersection of demand D and
+
+supply S occurs at equilibrium E0. However, a price ceiling is set at the interest rate Rc, below the equilibrium interest rate R0, and so the interest rate cannot adjust upward to the equilibrium. At the price ceiling, the quantity demanded, Qd, exceeds the quantity supplied, Qs. There is excess demand, also called a shortage.",,
+A,q20,conditional,Does a legal cap on interest rates matter if it is set well above the market interest rate?,,No. A ceiling set at a relatively high level is nonbinding and has no practical effect unless the equilibrium rate rises above it.,112,"A price ceiling that is set at a relatively high level is nonbinding, and it will have no practical effect unless the equilibrium price soars high enough to exceed the price ceiling.",False,"[#1 p112 ch4 micro3e-p0112-fx500o50-000]
+Many states do have usury laws, which impose an upper limit on the interest rate that lenders can charge. However, in many cases these upper limits are well above the market interest rate. For example, if the interest rate is not allowed to rise above 30% per year, it can still fluctuate below that level according to market forces. A price ceiling that is set at a relatively high level is nonbinding, and it will have no practical effect unless the equilibrium price soars high enough to exceed th
+
+[#2 p111 ch4 micro3e-p0111-fx500o50-007]
+R0, and so the interest rate cannot adjust upward to the equilibrium. At the price ceiling, the quantity demanded, Qd, exceeds the quantity supplied, Qs. There is excess demand, also called a shortage.
+
+[#3 p108 ch4 micro3e-p0108-fx500o50-003]
+ rate (remember, this measures the ""price"" in the financial market) is above the equilibrium level, then an excess supply, or a surplus, of financial capital will arise in this market. For example, at an interest rate of 21%, the quantity of funds supplied increases to $750 billion, while the quantity demanded decreases to $480 billion. At this above-equilibrium interest rate, firms are eager to supply loans to credit card borrowers, but relatively few people or businesses wish to borrow. As a r",,
+B,q20,conditional,Does a legal cap on interest rates matter if it is set well above the market interest rate?,,No. A ceiling set at a relatively high level is nonbinding and has no practical effect unless the equilibrium rate rises above it.,112,"A price ceiling that is set at a relatively high level is nonbinding, and it will have no practical effect unless the equilibrium price soars high enough to exceed the price ceiling.",True,"[#1 p112 ch4 micro3e-p0112-pb1000-000]
+Many states do have usury laws, which impose an upper limit on the interest rate that lenders can charge. However, in many cases these upper limits are well above the market interest rate. For example, if the interest rate is not allowed to rise above 30% per year, it can still fluctuate below that level according to market forces. A price ceiling that is set at a relatively high level is nonbinding, and it will have no practical effect unless the equilibrium price soars high enough to exceed the price ceiling.
+
+[#2 p108 ch4 micro3e-p0108-pb1000-002]
+If the interest rate (remember, this measures the ""price"" in the financial market) is above the equilibrium level, then an excess supply, or a surplus, of financial capital will arise in this market. For example, at an interest rate of 21%, the quantity of funds supplied increases to $750 billion, while the quantity demanded decreases to $480 billion. At this above-equilibrium interest rate, firms are eager to supply loans to credit card borrowers, but relatively few people or businesses wish to borrow. As a result, some credit card firms will lower the interest rates (or other fees) they charge to attract more business. This strategy will push the interest rate down toward the equilibrium level.
+
+[#3 p108 ch4 micro3e-p0108-pb1000-003]
+If the interest rate is below the equilibrium, then excess demand or a shortage of funds occurs in this market. At an interest rate of 13%, the quantity of funds credit card borrowers demand increases to $700 billion, but the quantity credit card firms are willing to supply is only $510 billion. In this situation, credit card firms will perceive that they are overloaded with eager borrowers and conclude that they have an opportunity to raise interest rates or fees. The interest rate will face economic pressures to creep up toward the equilibrium level.
+
+The FRED database publishes some two dozen measures of interest rates, including interest rates on credit cards, automobile loans, personal loans, mortgage loans, and more. You can find these at the FRED website (https://openstax.org/l/FRED_stlouis).",,
+C,q20,conditional,Does a legal cap on interest rates matter if it is set well above the market interest rate?,,No. A ceiling set at a relatively high level is nonbinding and has no practical effect unless the equilibrium rate rises above it.,112,"A price ceiling that is set at a relatively high level is nonbinding, and it will have no practical effect unless the equilibrium price soars high enough to exceed the price ceiling.",True,"[#1 p112 ch4 micro3e-p0112-pb1000-000]
+Many states do have usury laws, which impose an upper limit on the interest rate that lenders can charge. However, in many cases these upper limits are well above the market interest rate. For example, if the interest rate is not allowed to rise above 30% per year, it can still fluctuate below that level according to market forces. A price ceiling that is set at a relatively high level is nonbinding, and it will have no practical effect unless the equilibrium price soars high enough to exceed the price ceiling.
+
+[#2 p108 ch4 micro3e-p0108-pb1000-002]
+If the interest rate (remember, this measures the ""price"" in the financial market) is above the equilibrium level, then an excess supply, or a surplus, of financial capital will arise in this market. For example, at an interest rate of 21%, the quantity of funds supplied increases to $750 billion, while the quantity demanded decreases to $480 billion. At this above-equilibrium interest rate, firms are eager to supply loans to credit card borrowers, but relatively few people or businesses wish to borrow. As a result, some credit card firms will lower the interest rates (or other fees) they charge to attract more business. This strategy will push the interest rate down toward the equilibrium level.
+
+[#3 p108 ch4 micro3e-p0108-pb1000-003]
+If the interest rate is below the equilibrium, then excess demand or a shortage of funds occurs in this market. At an interest rate of 13%, the quantity of funds credit card borrowers demand increases to $700 billion, but the quantity credit card firms are willing to supply is only $510 billion. In this situation, credit card firms will perceive that they are overloaded with eager borrowers and conclude that they have an opportunity to raise interest rates or fees. The interest rate will face economic pressures to creep up toward the equilibrium level.
+
+The FRED database publishes some two dozen measures of interest rates, including interest rates on credit cards, automobile loans, personal loans, mortgage loans, and more. You can find these at the FRED website (https://openstax.org/l/FRED_stlouis).",,
+A,q21,paraphrase,"If organized workers bargain the wage above the market-clearing level, what happens to how many workers firms hire?",,"Firms hire less labor than at the equilibrium wage (Qd < Qe), and there is an excess supply of workers wanting those jobs.",348,"At the higher union wage Wu, the firms in this industry will hire less labor than they would have hired in equilibrium.",False,"[#1 p343 ch14 micro3e-p0343-fx500o50-008]
+. However, here is the thing: we assume that the firm is determining how many workers to hire in total. They are not hiring sequentially. Let's look how this plays out with the
+
+[#2 p348 ch14 micro3e-p0348-fx500o50-004]
+ matched by higher productivity. If so, then the firm can afford to pay the higher union wages and, the demand curve for ""unionized"" labor could actually shift to the right. This could reduce the job losses as the equilibrium employment level shifts to the right and the difference between the equilibrium and the union wages will have been reduced. If worker unionization does not increase productivity, then the higher union wage will cause lower profits or losses for the firm.
+
+Union workers migh
+
+[#3 p341 ch14 micro3e-p0341-fx500o50-004]
+while economists use the theory of perfect competition as an ideal case of market structure, there are very few examples of perfectly competitive industries in the real world. What about labor markets? How many labor markets are perfectly competitive? There are probably more examples of perfectly competitive labor markets than perfectly competitive product markets, but that doesn't mean that all labor markets are competitive.
+
+When a job applicant is bargaining with an employer for a position, t",,
+B,q21,paraphrase,"If organized workers bargain the wage above the market-clearing level, what happens to how many workers firms hire?",,"Firms hire less labor than at the equilibrium wage (Qd < Qe), and there is an excess supply of workers wanting those jobs.",348,"At the higher union wage Wu, the firms in this industry will hire less labor than they would have hired in equilibrium.",False,"[#1 p348 ch14 micro3e-p0348-pb1000-002]
+From the firm's point of view, the key question is whether union workers' higher wages are matched by higher productivity. If so, then the firm can afford to pay the higher union wages and, the demand curve for ""unionized"" labor could actually shift to the right. This could reduce the job losses as the equilibrium employment level shifts to the right and the difference between the equilibrium and the union wages will have been reduced. If worker unionization does not increase productivity, then the higher union wage will cause lower profits or losses for the firm.
+
+Union workers might have higher productivity than nonunion workers for a number of reasons. First, higher wages may elicit higher productivity. Second, union workers tend to stay longer at a given job, a trend that reduces the employer's costs for training and hiring and results in workers with more years of experience. Many unions also offer job training and apprenticeship programs.
+
+[#2 p348 ch14 micro3e-p0348-pb1000-001]
+From the union point of view, workers who receive higher wages are better off. However, notice that the quantity of workers (Qd) hired at the union wage Wu is smaller than the quantity Qe that the firm would have hired at the original equilibrium wage. A sensible union must recognize that when it pushes up the wage, it also reduces the firms' incentive to hire. This situation does not necessarily mean that union workers are fired. Instead, it may be that when union workers move on to other jobs or retire, they are not always replaced, or perhaps when a firm expands production, it expands employment somewhat less with a higher union wage than it would have done with the lower equilibrium wage. Other situations could be that a firm decides to purchase inputs from nonunion producers, rather than producing them with its own highly paid unionized workers, or perhaps the firm moves or opens a new facility in a state or country where unions are less powerful.
+
+[#3 p347 ch14 micro3e-p0347-pb1000-001]
+What are the limits on how much higher pay union workers can receive? To analyze these questions, let's consider a situation where all firms in an industry must negotiate with a single union, and no firm is allowed to hire nonunion labor. If no labor union existed in this market, then equilibrium (E) in the labor market would occur at the intersection of the demand for labor (D) and the supply of labor (S) as we see in Figure 14.12. This is the same result as we showed in Figure 14.6 above. The union can, however, threaten that, unless firms agree to the wages they demand, the workers will strike. As a result, the labor union manages to achieve, through negotiations with the firms, a union wage of Wu for its members, above what the equilibrium wage would otherwise have been.",,
+C,q21,paraphrase,"If organized workers bargain the wage above the market-clearing level, what happens to how many workers firms hire?",,"Firms hire less labor than at the equilibrium wage (Qd < Qe), and there is an excess supply of workers wanting those jobs.",348,"At the higher union wage Wu, the firms in this industry will hire less labor than they would have hired in equilibrium.",False,"[#1 p348 ch14 micro3e-p0348-pb1000-002]
+From the firm's point of view, the key question is whether union workers' higher wages are matched by higher productivity. If so, then the firm can afford to pay the higher union wages and, the demand curve for ""unionized"" labor could actually shift to the right. This could reduce the job losses as the equilibrium employment level shifts to the right and the difference between the equilibrium and the union wages will have been reduced. If worker unionization does not increase productivity, then the higher union wage will cause lower profits or losses for the firm.
+
+Union workers might have higher productivity than nonunion workers for a number of reasons. First, higher wages may elicit higher productivity. Second, union workers tend to stay longer at a given job, a trend that reduces the employer's costs for training and hiring and results in workers with more years of experience. Many unions also offer job training and apprenticeship programs.
+
+[#2 p348 ch14 micro3e-p0348-pb1000-001]
+From the union point of view, workers who receive higher wages are better off. However, notice that the quantity of workers (Qd) hired at the union wage Wu is smaller than the quantity Qe that the firm would have hired at the original equilibrium wage. A sensible union must recognize that when it pushes up the wage, it also reduces the firms' incentive to hire. This situation does not necessarily mean that union workers are fired. Instead, it may be that when union workers move on to other jobs or retire, they are not always replaced, or perhaps when a firm expands production, it expands employment somewhat less with a higher union wage than it would have done with the lower equilibrium wage. Other situations could be that a firm decides to purchase inputs from nonunion producers, rather than producing them with its own highly paid unionized workers, or perhaps the firm moves or opens a new facility in a state or country where unions are less powerful.
+
+[#3 p347 ch14 micro3e-p0347-pb1000-001]
+What are the limits on how much higher pay union workers can receive? To analyze these questions, let's consider a situation where all firms in an industry must negotiate with a single union, and no firm is allowed to hire nonunion labor. If no labor union existed in this market, then equilibrium (E) in the labor market would occur at the intersection of the demand for labor (D) and the supply of labor (S) as we see in Figure 14.12. This is the same result as we showed in Figure 14.6 above. The union can, however, threaten that, unless firms agree to the wages they demand, the workers will strike. As a result, the labor union manages to achieve, through negotiations with the firms, a union wage of Wu for its members, above what the equilibrium wage would otherwise have been.",,
+A,q22,direct,"According to Gary Becker, how do competitive markets affect discrimination by employers?",,"Competitive markets can allow some employers to discriminate, but they also give profit-seeking firms incentives not to discriminate.",357,"Becker pointed out that while competitive markets can allow some employers to practice discrimination, it can also provide profit-seeking firms with incentives not to discriminate.",True,"[#1 p357 ch14 micro3e-p0357-fx500o50-007]
+off. While the government has legally abolished discriminatory labor practices, structures and systems take a very long time to eradicate.
+
+Competitive Markets and Discrimination
+
+Gary Becker (1930-2014), who won the Nobel Prize in economics in 1992, was one of the first to analyze discrimination in economic terms. Becker pointed out that while competitive markets can allow some employers to practice discrimination, it can also provide profit-seeking firms with incentives not to discriminate. Gi
+
+[#2 p357 ch14 micro3e-p0357-fx500o50-008]
+king firms with incentives not to discriminate. Given these incentives, Becker explored the question of why discrimination persists.
+
+If a business is located in an area with a large minority population and refuses to sell to minorities, it will cut into its own profits. If some businesses run by bigoted employers refuse to pay women and/or minorities a
+
+[#3 p358 ch14 micro3e-p0358-fx500o50-002]
+ After all, discrimination against African Americans persisted in the market-oriented U.S. economy during the century between the ratification of the 13th Amendment, which abolished slavery in 1865, and the passage of the Civil Rights Act of 1964-and has continued since then, too.
+
+Why does discrimination persist in competitive markets? Gary Becker sought to explain this persistence. Discriminatory impulses can emerge at a number of levels: among managers, among workers, and among customers. Con",,
+B,q22,direct,"According to Gary Becker, how do competitive markets affect discrimination by employers?",,"Competitive markets can allow some employers to discriminate, but they also give profit-seeking firms incentives not to discriminate.",357,"Becker pointed out that while competitive markets can allow some employers to practice discrimination, it can also provide profit-seeking firms with incentives not to discriminate.",True,"[#1 p357 ch14 micro3e-p0357-pb1000-005]
+Competitive Markets and Discrimination
+
+Gary Becker (1930-2014), who won the Nobel Prize in economics in 1992, was one of the first to analyze discrimination in economic terms. Becker pointed out that while competitive markets can allow some employers to practice discrimination, it can also provide profit-seeking firms with incentives not to discriminate. Given these incentives, Becker explored the question of why discrimination persists.
+
+If a business is located in an area with a large minority population and refuses to sell to minorities, it will cut into its own profits. If some businesses run by bigoted employers refuse to pay women and/or minorities a
+
+[#2 p358 ch14 micro3e-p0358-pb1000-002]
+Why does discrimination persist in competitive markets? Gary Becker sought to explain this persistence. Discriminatory impulses can emerge at a number of levels: among managers, among workers, and among customers. Consider the situation of a store owner or manager who is not personally prejudiced, but who has many customers who are prejudiced. If that manager treats all groups fairly, the manager may find it drives away prejudiced customers. In such a situation, a policy of nondiscrimination could reduce the firm's profits. After all, a business firm is part of society, and a firm that does not follow the societal norms is likely to suffer.
+
+[#3 p358 ch14 micro3e-p0358-pb1000-003]
+As economist William A. Darity Jr. points out, however, the ""prejudiced customer"" rationale falls apart when considering the many jobs that have no customer contact. Darity examined several theories regarding the persistence of employment discrimination, including rationales regarding group membership and employers' lack of information about candidates of other genders or races. Darity also directly studies and interprets others' work on discrimination in other countries, such as wage disparities between Sikh and Hindu men in India. Darity concludes that the competitive forces of the market have not been enough to overcome employment and wage discrimination, and, on their own, are unlikely to end such discrimination in the future.
+
+LINK IT UP
+
+Read this article (https://openstax.org/l/censusincome) to learn more about wage discrimination.",,
+C,q22,direct,"According to Gary Becker, how do competitive markets affect discrimination by employers?",,"Competitive markets can allow some employers to discriminate, but they also give profit-seeking firms incentives not to discriminate.",357,"Becker pointed out that while competitive markets can allow some employers to practice discrimination, it can also provide profit-seeking firms with incentives not to discriminate.",True,"[#1 p357 ch14 micro3e-p0357-pb1000-005]
+Competitive Markets and Discrimination
+
+Gary Becker (1930-2014), who won the Nobel Prize in economics in 1992, was one of the first to analyze discrimination in economic terms. Becker pointed out that while competitive markets can allow some employers to practice discrimination, it can also provide profit-seeking firms with incentives not to discriminate. Given these incentives, Becker explored the question of why discrimination persists.
+
+If a business is located in an area with a large minority population and refuses to sell to minorities, it will cut into its own profits. If some businesses run by bigoted employers refuse to pay women and/or minorities a
+
+[#2 p358 ch14 micro3e-p0358-pb1000-002]
+Why does discrimination persist in competitive markets? Gary Becker sought to explain this persistence. Discriminatory impulses can emerge at a number of levels: among managers, among workers, and among customers. Consider the situation of a store owner or manager who is not personally prejudiced, but who has many customers who are prejudiced. If that manager treats all groups fairly, the manager may find it drives away prejudiced customers. In such a situation, a policy of nondiscrimination could reduce the firm's profits. After all, a business firm is part of society, and a firm that does not follow the societal norms is likely to suffer.
+
+[#3 p358 ch14 micro3e-p0358-pb1000-003]
+As economist William A. Darity Jr. points out, however, the ""prejudiced customer"" rationale falls apart when considering the many jobs that have no customer contact. Darity examined several theories regarding the persistence of employment discrimination, including rationales regarding group membership and employers' lack of information about candidates of other genders or races. Darity also directly studies and interprets others' work on discrimination in other countries, such as wage disparities between Sikh and Hindu men in India. Darity concludes that the competitive forces of the market have not been enough to overcome employment and wage discrimination, and, on their own, are unlikely to end such discrimination in the future.
+
+LINK IT UP
+
+Read this article (https://openstax.org/l/censusincome) to learn more about wage discrimination.",,
